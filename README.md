@@ -25,7 +25,7 @@ The "Packages" directory is located at:
 
 ## Usage
 
-* **Convert hole ERB or HTML file** `Shift+Alt+F` - creates new file in the same folder using the same name as the source ending with '.html.haml'.
+* **Convert whole ERB or HTML file** `Shift+Alt+F` - creates new file in the same folder using the same name as the source ending with '.html.haml'.
 * **Convert selection** `Shift+Alt+S` - replaces selection of HTML or ERB with HAML content.
 * **Convert clipboard content** `Shift+Alt+V` - inserts HAML of converted clipboard HTML or ERB content.
 
