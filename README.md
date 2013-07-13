@@ -1,15 +1,18 @@
-# HTML to Haml plugin for Sublime Text 2
-====================
+# HTML to Haml plugin for Sublime Text 3
 
 Converts files, selection and clipboard content from HTML or ERB to HAML using http://html2haml.heroku.com API
 
-## Install
-The easiest wat to get HTML2Haml is to install it from **Sublime Package Control** though you still can install it from **Git repository**
+## Installation
+
+### [Sublime Package Control](http://wbond.net/sublime_packages/package_control)
+
+In the command Pallette choose **Package Control: Install Repository** and select **HTML2Haml**
+
+### Git installation
 
 Clone the repository in your Sublime Text "Packages" directory:
 
     git clone git://github.com/pavelpachkovskij/sublime-html-to-haml.git
-
 
 The "Packages" directory is located at:
 
@@ -37,16 +40,6 @@ The "Packages" directory is located at:
 * **HTML2Haml: Convert selection**
 * **HTML2Haml: Convert clipboard content**
 
-## Sublime Text 3
+## Sublime Text 2
 
-### Git installation
-
-Follow the instruction from [Sublime Text 3 branch](https://github.com/pavelpachkovskij/sublime-html-to-haml/tree/SublimeText3)
-
-### Sublime Package Control
-
-In your command Pallette choose **Package Control: Add Repository** and add Sublime Text 3 branch
-
-    https://github.com/pavelpachkovskij/sublime-html-to-haml/tree/SublimeText3
-
-Then simply (re)install HTML2Haml plugin.
+Follow the instruction from [Sublime Text 2 branch](https://github.com/pavelpachkovskij/sublime-html-to-haml/tree/SublimeText2)

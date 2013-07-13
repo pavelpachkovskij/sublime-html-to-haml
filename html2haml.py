@@ -1,4 +1,4 @@
-import urllib2
+import urllib.request
 import json
 import sublime, sublime_plugin
 
@@ -50,9 +50,10 @@ class HTHTools:
 		host = 'http://html2haml.heroku.com/api.json'
 		data = {'page': {'html': html}}
 		data_json = json.dumps(data)
-		req = urllib2.Request(host, data_json, {'content-type': 'application/json'})
-		response_stream = urllib2.urlopen(req)
-		result = json.loads(response_stream.read())
+		data_json = data_json.encode('utf-8')
+		req = urllib.request.Request(host, data_json, {'content-type': 'application/json'})
+		response_stream = urllib.request.urlopen(req)
+		result = json.loads(response_stream.read().decode("utf-8"))
 
 		if result["page"]:
 			return result["page"]["haml"]
