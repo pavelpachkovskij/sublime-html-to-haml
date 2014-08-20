@@ -1,6 +1,7 @@
 import urllib.request
 import json
 import sublime, sublime_plugin
+import os
 
 settings = sublime.load_settings("html2haml.sublime-settings")
 
@@ -14,7 +15,7 @@ class HtmlToHamlFromFileCommand(sublime_plugin.TextCommand):
 		if target:
 			with open(source, 'r') as f:
 				html = f.read()
-			haml = HTHTools.post_html_return_haml(html)
+			haml = HTHTools.convert_html_to_haml(html)
 			if haml != None:
 				with open(target, 'w') as f:
 					f.write(haml)
@@ -28,7 +29,7 @@ class HtmlToHamlFromSelectionCommand(sublime_plugin.TextCommand):
 		for region in self.view.sel():
 			if not region.empty():
 				html = self.view.substr(region)
-				haml = HTHTools.post_html_return_haml(html)
+				haml = HTHTools.convert_html_to_haml(html)
 				if haml != None:
 					self.view.replace(edit, region, haml)
 
@@ -38,7 +39,7 @@ class HtmlToHamlFromSelectionCommand(sublime_plugin.TextCommand):
 class HtmlToHamlFromClipboardCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		html = sublime.get_clipboard()
-		haml = HTHTools.post_html_return_haml(html)
+		haml = HTHTools.convert_html_to_haml(html)
 		if haml != None:
 			for region in self.view.sel():
 				self.view.replace(edit, region, haml)
@@ -62,3 +63,21 @@ class HTHTools:
 			return result["page"]["haml"]
 		else:
 			return None
+
+	@classmethod
+	def local_html2haml(self, html):
+		from subprocess import Popen, PIPE
+		child = Popen('echo "'+ html +'" | html2haml -s', shell=True, stdout=PIPE)
+		haml = child.communicate()[0]
+		return_code = child.returncode
+		if os.WEXITSTATUS(return_code) == 0:
+			return haml
+		else:
+			return None
+
+	@classmethod
+	def convert_html_to_haml(self, html):
+		if os.WEXITSTATUS(os.system('which html2haml')) == 0: #if local html2haml is available
+			return self.local_html2haml(html)
+		else:
+			return self.post_html_return_haml(html)
